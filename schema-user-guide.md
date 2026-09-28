@@ -19,10 +19,10 @@ The spreadsheet `schema/schema-crate/additional-ro-crate-metadata.xlsx` is a tem
 - [Schema](#schema): Contains the [Schema](http://schema.org/Schema) entity.
 - [Classes](#classes): Contains the [Class](http://schema.org/Class) entities for the schema.
 - [Properties](#properties): Contains the [Property](http://schema.org/Property) entities for the schema.
-- [DefinedTermSets](#definedtermsets): Contains the [DefinedTermSet](http://schema.org/DefinedTermSet) entities for the schema, if applicable.
-- [DefinedTerms](#definedterms): Contains the [DefinedTerm](http://schema.org/DefinedTerm) entities for the schema, if applicable.
-- [ItemLists](#itemlists): Contains the [ItemList](http://schema.org/ItemList) entities for the schema, if applicable.
-- [ItemListElements](#itemlistelements): Contains the [ItemListElement](http://schema.org/itemListElement) entities for the schema, if applicable.
+- [DefinedTermSets](#definedtermsets): Contains the [DefinedTermSet](http://schema.org/DefinedTermSet) entities for the schema, if applicable. For more information, see [Class Instances vs. Defined Terms](#class-instances-vs-defined-terms).
+- [DefinedTerms](#definedterms): Contains the [DefinedTerm](http://schema.org/DefinedTerm) entities for the schema, if applicable. For more information, see [Class Instances vs. Defined Terms](#class-instances-vs-defined-terms).
+- [ItemLists](#itemlists): Contains the [ItemList](http://schema.org/ItemList) entities for the schema, if applicable. For more information, see [Class Instances vs. Defined Terms](#class-instances-vs-defined-terms).
+- [ItemListElements](#itemlistelements): Contains the [ItemListElement](http://schema.org/itemListElement) entities for the schema, if applicable. For more information, see [Class Instances vs. Defined Terms](#class-instances-vs-defined-terms).
 
 > NOTE: Quotation marks around entities in the spreadsheet, e.g. `"template:ClassExample"`, indicate that the value is referencing the `@id` of another entity in the schema.
 
@@ -136,7 +136,7 @@ isReverse_hasPart | `#hasSpecializedSchema` | The `@id` of the `ResourceDescript
 
 ### DefinedTermSets
 
-The `DefinedTermSets` sheet contains the specialized schema defined term sets defined in the schema. Each defined term set is represented as a row in the sheet, with the following columns:
+The `DefinedTermSets` sheet contains the specialized schema defined term sets defined in the schema. For more information, see [Class Instances vs. Defined Terms](#class-instances-vs-defined-terms). Each defined term set is represented as a row in the sheet, with the following columns:
 
 Column | Example | Description
 --- | --- | ---
@@ -151,7 +151,7 @@ isReverse_hasPart | `#hasSpecializedSchema` | The `@id` of the `ResourceDescript
 
 ### DefinedTerms
 
-The `DefinedTerms` sheet contains the specialized schema defined terms defined in the schema. Each defined term is represented as a row in the sheet, with the following columns:
+The `DefinedTerms` sheet contains the specialized schema defined terms defined in the schema. For more information, see [Class Instances vs. Defined Terms](#class-instances-vs-defined-terms). Each defined term is represented as a row in the sheet, with the following columns:
 
 Column | Example | Description
 --- | --- | ---
@@ -166,7 +166,7 @@ isReverse_hasPart | `#hasSpecializedSchema` | The `@id` of the `ResourceDescript
 
 ### ItemLists
 
-The `ItemLists` sheet contains a list of item lists that are part of the schema. Each item list is represented as a row in the sheet, with the following columns:
+The `ItemLists` sheet contains a list of item lists that are part of the schema. For more information, see [Class Instances vs. Defined Terms](#class-instances-vs-defined-terms). Each item list is represented as a row in the sheet, with the following columns:
 
 Column | Example | Description
 --- | --- | ---
@@ -178,7 +178,7 @@ description | `This is an example of an item list and its format.` | A descripti
 
 ### ItemListElements
 
-The `ItemListElements` sheet contains a list of item elements that are part of an `ItemList` in the schema. Each item element is represented as a row in the sheet, with the following columns:
+The `ItemListElements` sheet contains a list of item elements that are part of an `ItemList` in the schema. For more information, see [Class Instances vs. Defined Terms](#class-instances-vs-defined-terms). Each item element is represented as a row in the sheet, with the following columns:
 
 Column | Example | Description
 --- | --- | ---
@@ -190,6 +190,15 @@ description | `This is an example of an item element and its format.` | A descri
 rdfs:label | `template:ItemListElementExample` | The label for the item element. The template populates this with the same value as the `@id` column.
 isReverse_itemListElement | `#itemListExample` | The `@id` of the `ItemList` entity that this item element is part of. This should be the same value as the `@id` column in the `ItemLists` sheet.
 isReverse_hasPart | `#hasSpecializedSchema` | The `@id` of the `ResourceDescriptor` entity that lists the specialized schema terms defined in the schema. This should be the same value as the `@id` column in the `ResourceDescriptor` sheet.
+
+### Class Instances vs. Defined Terms
+
+In your schema, you may want to define lists of entities that can be used as the values for particular properties. There are two ways to do this: using classes and their instances (with item lists and item list elements), or using defined term sets and their defined terms.
+
+Classes and their instances have an internal structure that allows for a richer description of subfields, properties and inheritance. Relationships between entities can more easily be described with classes and their properties. Defined terms sets and their defined terms don't allow for this as much.
+If you need to define the same set of values for a number of properties, this is a good indication that class instances are needed.
+
+Also keep in mind what approach similar standards and peers are using when deciding which option to use.
 
 ## Edit Schema Text
 
